@@ -1,18 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
 import "./index.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App></App>,
-  },
-]);
+import { RouterProvider } from "react-router-dom";
+import router from "./router";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+    <Navbar />
     <RouterProvider router={router} />
+    <Footer />
   </React.StrictMode>
 );
