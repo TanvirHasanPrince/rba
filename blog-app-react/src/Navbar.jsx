@@ -1,5 +1,3 @@
-
-
 const Navbar = () => {
   return (
     <header className="bg-white shadow-md">
@@ -23,8 +21,8 @@ const Navbar = () => {
               </a>
             </li>
             <li>
-              <a href="#" className="text-gray-600 hover:text-gray-800">
-                Contact
+              <a href="/addblog" className="text-gray-600 hover:text-gray-800">
+                Add blog
               </a>
             </li>
           </ul>
@@ -32,6 +30,6 @@ const Navbar = () => {
       </div>
     </header>
   );
-}
+};
 
-export default Navbar
+export default Navbar;

@@ -1,20 +1,29 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import BlogForm from "./BlogForm.jsx";
 
 function App() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/blogs")
-      .then((response) => response.json())
-      .then((data) => setPosts(data))
-      .catch((error) => console.error("Error fetching data:", error));
+    const storedPosts = JSON.parse(localStorage.getItem("posts")) || [];
+    setPosts(storedPosts);
   }, []);
+
+  const addPost = (newPost) => {
+    setPosts((prevPosts) => [...prevPosts, newPost]);
+  };
+
+  const deletePost = (id) => {
+    const updatedPosts = posts.filter((post) => post.id !== id);
+    setPosts(updatedPosts);
+    localStorage.setItem("posts", JSON.stringify(updatedPosts));
+  };
 
   return (
     <div className="min-h-screen bg-gray-100">
       <main className="container mx-auto px-4 py-8">
+        <BlogForm addPost={addPost} />
         <section className="mb-12">
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">
             Featured Posts
@@ -44,6 +53,12 @@ function App() {
                     >
                       Read more
                     </Link>
+                    <button
+                      onClick={() => deletePost(post.id)}
+                      className="text-red-500 hover:text-red-600 ml-4"
+                    >
+                      Delete
+                    </button>
                   </div>
                 </div>
               ))
